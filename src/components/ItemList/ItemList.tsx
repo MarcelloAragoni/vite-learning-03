@@ -1,14 +1,20 @@
+import { Item } from "../TodoList/TodoList";
+
 type Props = {
-  children: string;
-  onClose?: () => void;
+  item: Item;
+  onDelete?: () => void;
+  onComplete: (item: Item) => void;
 };
 
-export default function ItemList({ children, onClose }: Props) {
+export default function ItemList({ item, onDelete, onComplete }: Props) {
   return (
     <li>
-      <input type="checkbox" />
-      {children}
-      <button onClick={onClose}>Delete</button>
+      <label>
+        <input onChange={() => onComplete(item)} type="checkbox" />
+        {item.value}
+        {item.done && <span>Done</span>}
+      </label>
+      <button onClick={onDelete}>Delete</button>
     </li>
   );
 }
